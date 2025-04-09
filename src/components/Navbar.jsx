@@ -45,7 +45,7 @@ const Navbar = () => {
     <nav className="navbar navbar-expand-lg fixed-top shadow" style={styles.navbar}>
       <div className="container-fluid">
         <Link className="navbar-brand fw-bold" to="/">
-          <img src="/public/Logo.png" alt="School Logo" style={styles.brandLogo} />
+          <img src="/Logo.png" alt="School Logo" style={styles.brandLogo} />
         </Link>
         <button
           className="navbar-toggler"
