@@ -1,0 +1,20 @@
+.text-primary-custom {
+    color: #0b1e3d; /* Navy Blue from logo */
+  }
+  
+  .bg-light {
+    background-color: #f8f9fa; /* Soft light gray for contrast */
+  }
+  
+  .feature-icon i {
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .feature-icon i:hover {
+    transform: scale(1.2);
+    color: #b40000; /* Red hover effect */
+  }
+
+
+  
+  

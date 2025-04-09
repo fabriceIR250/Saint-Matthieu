@@ -1,0 +1,183 @@
+
+
+/* Navbar.css */
+.navbar {
+    background-color: #FFFFFF; /* clean white background */
+    border-bottom: 3px solid #002147; /* dark blue border */
+  }
+  
+  .navbar-brand img {
+    height: 60px;
+  }
+  
+  .nav-link {
+    color: #002147;
+    font-weight: 500;
+    transition: color 0.3s ease-in-out;
+  }
+  
+  .nav-link:hover,
+  .nav-link.active {
+    color: #B22222; /* crimson red on hover */
+  }
+  
+  .navbar-toggler {
+    border-color: #002147;
+  }
+  
+  .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 30 30' ..."); /* optional if needed */
+  }
+  
+  .transition-button {
+    transition: all 0.3s ease;
+  }
+  
+  .btn-outline-primary {
+    color: #002147;
+    border-color: #002147;
+  }
+  
+  .btn-outline-primary:hover {
+    background-color: #002147;
+    color: #ffffff;
+  }
+  
+  .btn-primary {
+    background-color: #B22222;
+    border-color: #B22222;
+  }
+  
+  .btn-primary:hover {
+    background-color: #8B1A1A;
+    border-color: #8B1A1A;
+  }
+  
+/* Navbar link hover effect */
+.nav-link.nav-link-animate {
+    transition: color 0.3s ease, transform 0.3s ease;
+  }
+  
+  .nav-link.nav-link-animate:hover {
+    color: #0d6efd; /* Change to your desired hover color */
+    transform: translateY(-3px);
+  }
+  
+  /* Navbar button transitions */
+  .transition-button {
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+  
+  .transition-button:hover {
+    background-color: #0d6efd; /* Change to your desired hover color */
+    transform: translateY(-3px);
+  }
+  
+  /* Add smooth fade-in animation to the navbar */
+  .navbar-animate {
+    opacity: 0;
+    animation: fadeIn 1s forwards;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  /* Add subtle animation for navbar items when they appear */
+  .navbar-nav .nav-item {
+    opacity: 0;
+    animation: fadeInItem 0.5s forwards;
+  }
+  
+  .navbar-nav .nav-item:nth-child(1) {
+    animation-delay: 0.1s;
+  }
+  
+  .navbar-nav .nav-item:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+  
+  .navbar-nav .nav-item:nth-child(3) {
+    animation-delay: 0.3s;
+  }
+  
+  .navbar-nav .nav-item:nth-child(4) {
+    animation-delay: 0.4s;
+  }
+  
+  .navbar-nav .nav-item:nth-child(5) {
+    animation-delay: 0.5s;
+  }
+  
+  .navbar-nav .nav-item:nth-child(6) {
+    animation-delay: 0.6s;
+  }
+  
+  @keyframes fadeInItem {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+
+
+
+
+
+
+/* Navbar link hover effect */
+.nav-link.nav-link-animate {
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+  
+.nav-link.nav-link-animate:hover {
+    color: #0d6efd;
+    transform: translateY(-3px);
+}
+
+/* Navbar button transitions */
+.transition-button {
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+  
+.transition-button:hover {
+    background-color: #0d6efd;
+    transform: translateY(-3px);
+}
+
+/* Add smooth fade-in animation to the navbar */
+.navbar-animate {
+    opacity: 0;
+    animation: fadeIn 1s forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Add subtle animation for navbar items when they appear */
+.navbar-nav .nav-item {
+    opacity: 0;
+    animation: fadeInItem 0.5s forwards;
+}
+
+.navbar-nav .nav-item:nth-child(1) { animation-delay: 0.1s; }
+.navbar-nav .nav-item:nth-child(2) { animation-delay: 0.2s; }
+.navbar-nav .nav-item:nth-child(3) { animation-delay: 0.3s; }
+.navbar-nav .nav-item:nth-child(4) { animation-delay: 0.4s; }
+.navbar-nav .nav-item:nth-child(5) { animation-delay: 0.5s; }
+.navbar-nav .nav-item:nth-child(6) { animation-delay: 0.6s; }
+
+@keyframes fadeInItem {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}

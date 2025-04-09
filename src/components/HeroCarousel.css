@@ -1,0 +1,54 @@
+.hero-section {
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.hero-content {
+  background-color: rgba(11, 30, 61, 0.6); /* Navy overlay */
+  padding: 30px;
+  border-radius: 12px;
+}
+
+.animate-text {
+  animation: fadeInUp 1s ease-in-out;
+}
+
+.hero-btn {
+  border: none;
+  padding: 12px 30px;
+  font-weight: bold;
+  border-radius: 25px;
+  transition: 0.3s;
+}
+
+.hero-btn:hover {
+  background-color: #b40000; /* red from the sun */
+}
+
+/* Add this to the HeroCarousel.css file */
+
+.animate-text {
+  animation: fadeInUp 2s ease-out forwards;
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-content h1 {
+  font-size: 3rem; /* Adjust the font size as needed */
+  font-weight: bold;
+  color: #0b1e3d; /* Ensure the color stays */
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); /* Optional: adds a shadow for extra contrast */
+}
