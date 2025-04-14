@@ -1,7 +1,10 @@
 import React from 'react';
+import Navbar from '../components/Navbar'; // Navbar are on or pages
 
 function Exams() {
   return (
+    <>
+    <Navbar />
     <div className="exams-page" style={{
       backgroundColor: '#f8f9fa',
       minHeight: '100vh',
@@ -182,6 +185,7 @@ function Exams() {
         }
       `}</style>
     </div>
+    </>
   );
 }
 

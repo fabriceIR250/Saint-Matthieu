@@ -1,7 +1,10 @@
 import React from 'react';
+import Navbar from '../components/Navbar'; // Navbar are on or pages
 
 function Contact() {
   return (
+    <>
+    <Navbar />
     <div className="contact-page" style={{
       backgroundColor: '#f8f9fa',
       minHeight: '100vh',
@@ -271,6 +274,7 @@ function Contact() {
         }
       `}</style>
     </div>
+    </>
   );
 }
 

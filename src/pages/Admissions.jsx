@@ -1,7 +1,10 @@
 import React from 'react';
+import Navbar from '../components/Navbar'; // Adjust the path as necessary
 
 function Admissions() {
   return (
+    <>
+    <Navbar />
     <div className="admissions-page text-white d-flex flex-column min-vh-100" style={{
       backgroundColor: '#f8f9fa',
       minHeight: '100vh',
@@ -210,6 +213,7 @@ function Admissions() {
         }
       `}</style>
     </div>
+    </>
   );
 }
 

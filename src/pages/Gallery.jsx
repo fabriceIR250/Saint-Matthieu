@@ -1,4 +1,5 @@
 import React from 'react';
+import Navbar from '../components/Navbar'; // Navbar are on or pages
 // import './Gallery.css';
 
 function Gallery() {
@@ -51,6 +52,8 @@ function Gallery() {
   ];
 
   return (
+    <>
+    <Navbar />
     <div className="gallery-page" style={{
       backgroundColor: '#f8f9fa',
       minHeight: '100vh',
@@ -214,6 +217,7 @@ function Gallery() {
         }
       `}</style>
     </div>
+    </>
   );
 }
 

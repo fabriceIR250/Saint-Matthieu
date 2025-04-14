@@ -1,8 +1,11 @@
 import React from 'react';
 import Footer from '../components/Footer'; // Import Footer component
+import Navbar from '../components/Navbar'; // Import Navbar component
 
 function About() {
   return (
+    <>
+    <Navbar /> {/* Navbar component */}
     <div 
       className="about-bg text-white d-flex flex-column min-vh-100" 
       style={{ width: '100vw' }} // Forces full viewport width
@@ -115,6 +118,7 @@ function About() {
         }
       `}</style>
     </div>
+    </>
   );
 }
 

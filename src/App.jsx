@@ -9,12 +9,12 @@ import Admissions from './pages/Admissions';
 import Exams from './pages/Exams';
 import Gallery from './pages/Gallery';
 import LoginForm from './components/Login';
-import Page from './pages/Page404';
+import Pages from './pages/Page404';
+import Dashboard from './user/Dashbord';
 
 function App() {
   return (
     <Router>
-      <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
@@ -24,7 +24,8 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/login" element={<LoginForm />} />
         <Route path="/register" element={<Register />} />
-        <Route path="*" element={Page} />
+        <Route path="*" element={<Pages />} />
+        <Route path="/user/Dashboard" element={<Dashboard />} />
       </Routes>
     </Router>
   );

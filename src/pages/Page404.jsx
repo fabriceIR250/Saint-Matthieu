@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 
 function PageNotFound() {
   return (
-    <div className="not-found-container">
+   <>
+    <div className="not-found-container" style={{width: '100vw', paddingTop : '80px'}}>
       <div className="stars">
         {[...Array(100)].map((_, i) => (
           <div key={i} className="star" style={{
@@ -214,6 +215,7 @@ function PageNotFound() {
         }
       `}</style>
     </div>
+   </>
   );
 }
 

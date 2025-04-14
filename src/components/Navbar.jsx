@@ -1,18 +1,43 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
+import { onAuthStateChanged, signOut } from 'firebase/auth';
+import { auth } from '../firebase'; // adjust this to your correct path
 
 const Navbar = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  
+
+  const [user, setUser] = useState(null);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+    });
+    return () => unsubscribe();
+  }, []);
+
+  const handleLogout = async () => {
+    await signOut(auth);
+    navigate('/');
+  };
+
+  const handleDashboard = () => {
+    navigate('/user/Dashboard');
+  };
+
+  const toggleDropdown = () => {
+    setDropdownOpen(!dropdownOpen);
+  };
+
   const styles = {
     navbar: {
-      backgroundColor: '#0b1e3d', // Navy blue background
+      backgroundColor: '#0b1e3d',
       padding: '1rem 2rem',
       zIndex: 1000,
     },
     navLink: {
-      color: '#ffffff', // White text
+      color: '#ffffff',
       fontWeight: '500',
       transition: 'all 0.3s ease',
       padding: '0.5rem 1rem',
@@ -20,15 +45,15 @@ const Navbar = () => {
     },
     navLinkHover: {
       color: '#ffffff',
-      backgroundColor: '#b40000', // Red background on hover
+      backgroundColor: '#b40000',
     },
     navLinkActive: {
       color: '#ffffff',
-      backgroundColor: '#b40000', // Red background for active link
+      backgroundColor: '#b40000',
     },
     brandLogo: {
       height: '40px',
-      filter: 'brightness(0) invert(1)', // Makes logo white
+      filter: 'brightness(0) invert(1)',
     },
     btnOutline: {
       color: '#ffffff',
@@ -36,52 +61,72 @@ const Navbar = () => {
       transition: 'all 0.3s ease',
       marginRight: '0.5rem',
     },
-    btnOutlineHover: {
-      backgroundColor: '#ffffff',
-      color: '#0b1e3d',
-    },
     btnPrimary: {
-      backgroundColor: '#b40000', // Red button
+      backgroundColor: '#b40000',
       border: '1px solid #b40000',
       color: '#fff',
       transition: 'all 0.3s ease',
     },
-    btnPrimaryHover: {
-      backgroundColor: '#900000', // Darker red on hover
-      borderColor: '#900000',
+    profileImage: {
+      width: '40px',
+      height: '40px',
+      borderRadius: '50%',
+      objectFit: 'cover',
+      cursor: 'pointer',
+      border: '2px solid #fff',
     },
-    toggler: {
-      filter: 'invert(1)', // White toggler icon
+    dropdown: {
+      position: 'absolute',
+      top: '60px',
+      right: '10px',
+      background: '#fff',
+      color: '#333',
+      borderRadius: '8px',
+      boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
+      padding: '10px',
+      zIndex: 9999,
+      width: '220px',
     },
+    dropdownItem: {
+      padding: '10px',
+      borderBottom: '1px solid #ddd',
+      cursor: 'pointer',
+      textAlign: 'left',
+    },
+    dropdownEmail: {
+      fontSize: '0.9rem',
+      fontWeight: 'bold',
+      marginBottom: '10px',
+      wordBreak: 'break-word',
+    },
+    logoutButton: {
+      backgroundColor: '#b40000',
+      color: 'white',
+      border: 'none',
+      padding: '8px 12px',
+      borderRadius: '5px',
+      width: '100%',
+      cursor: 'pointer',
+    }
   };
 
-  // Check if a nav item is active
   const isActive = (path) => {
     return location.pathname === path;
-  };
-
-  // Handle navigation to login page
-  const handleLoginClick = () => {
-    navigate('/login');
-  };
-
-  // Handle navigation to register page
-  const handleRegisterClick = () => {
-    navigate('/register');
   };
 
   return (
     <nav className="navbar navbar-expand-lg fixed-top" style={styles.navbar}>
       <div className="container-fluid">
         <NavLink className="navbar-brand fw-bold" to="/">
-          <img src="/Logo.png" alt="GS Busasamana Logo" style={styles.brandLogo} />
+          <img src="/Logo.png" alt="Logo" style={styles.brandLogo} />
         </NavLink>
+
         <button
           className="navbar-toggler"
           type="button"
           data-bs-toggle="collapse"
           data-bs-target="#navbarNav"
-          style={styles.toggler}
+          style={{ filter: 'invert(1)' }}
         >
           <span className="navbar-toggler-icon"></span>
         </button>
@@ -104,18 +149,6 @@ const Navbar = () => {
                     ...styles.navLink,
                     ...(isActive ? styles.navLinkActive : {}),
                   })}
-                  onMouseEnter={(e) => {
-                    if (!isActive(to)) {
-                      e.currentTarget.style.color = styles.navLinkHover.color;
-                      e.currentTarget.style.backgroundColor = styles.navLinkHover.backgroundColor;
-                    }
-                  }}
-                  onMouseLeave={(e) => {
-                    if (!isActive(to)) {
-                      e.currentTarget.style.color = styles.navLink.color;
-                      e.currentTarget.style.backgroundColor = 'transparent';
-                    }
-                  }}
                 >
                   <i className={`bi bi-${icon} me-1`}></i> {label}
                 </NavLink>
@@ -123,37 +156,51 @@ const Navbar = () => {
             ))}
           </ul>
 
-          <div className="d-flex ms-auto">
-            <button
-              className="btn mx-2"
-              style={styles.btnOutline}
-              onClick={handleLoginClick}
-              onMouseEnter={(e) => {
-                e.target.style.backgroundColor = styles.btnOutlineHover.backgroundColor;
-                e.target.style.color = styles.btnOutlineHover.color;
-              }}
-              onMouseLeave={(e) => {
-                e.target.style.backgroundColor = 'transparent';
-                e.target.style.color = styles.btnOutline.color;
-              }}
-            >
-              Login
-            </button>
-            <button
-              className="btn"
-              style={styles.btnPrimary}
-              onClick={handleRegisterClick}
-              onMouseEnter={(e) => {
-                e.target.style.backgroundColor = styles.btnPrimaryHover.backgroundColor;
-                e.target.style.borderColor = styles.btnPrimaryHover.borderColor;
-              }}
-              onMouseLeave={(e) => {
-                e.target.style.backgroundColor = styles.btnPrimary.backgroundColor;
-                e.target.style.borderColor = styles.btnPrimary.borderColor;
-              }}
-            >
-              Register
-            </button>
+          <div className="d-flex ms-auto align-items-center">
+            {!user ? (
+              <>
+                <button
+                  className="btn mx-2"
+                  style={styles.btnOutline}
+                  onClick={() => navigate('/login')}
+                >
+                  Login
+                </button>
+                <button
+                  className="btn"
+                  style={styles.btnPrimary}
+                  onClick={() => navigate('/register')}
+                >
+                  Register
+                </button>
+              </>
+            ) : (
+              <div className="position-relative">
+                <img
+                  src={user.photoURL || 'https://cdn-icons-png.flaticon.com/512/7153/7153150.png'}
+                  alt="Profile"
+                  style={styles.profileImage}
+                  onClick={toggleDropdown}
+                />
+                {dropdownOpen && (
+                  <div style={styles.dropdown}>
+                    <div style={styles.dropdownEmail}>{user.email}</div>
+                    <div
+                      style={styles.dropdownItem}
+                      onClick={handleDashboard}
+                    >
+                      My Dashboard
+                    </div>
+                    <button
+                      style={styles.logoutButton}
+                      onClick={handleLogout}
+                    >
+                      Logout
+                    </button>
+                  </div>
+                )}
+              </div>
+            )}
           </div>
         </div>
       </div>

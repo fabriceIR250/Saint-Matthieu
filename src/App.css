@@ -1,0 +1,25 @@
+
+
+body {
+    overflow-x: hidden;
+  }
+  
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: #0b1e3d; /* Dark navy track */
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: #b40000; /* Red scrollbar */
+    border-radius: 6px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: #900000; /* Darker red on hover */
+  }
+  
