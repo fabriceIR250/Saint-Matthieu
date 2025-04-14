@@ -1,5 +1,5 @@
 import React from 'react';
-import './HeroCarousel.css'; // Still use this for extra styles
+import './HeroCarousel.css';
 
 function HeroCarousel() {
   return (
@@ -10,46 +10,81 @@ function HeroCarousel() {
           <div
             className="hero-section"
             style={{
-              backgroundImage: `url(https://pbs.twimg.com/media/Gj21VnUWUAELjTi?format=jpg&name=large)`,
+              backgroundImage: `linear-gradient(rgba(11, 30, 61, 0.7), rgba(11, 30, 61, 0.7)), url(https://pbs.twimg.com/media/Gj21VnUWUAELjTi?format=jpg&name=large)`,
             }}
           >
             <div className="container h-100">
               <div className="row h-100 align-items-center">
-                <div className="col-12 hero-content text-center text-md-left text-white">
-                  <p className="text-danger animate-text">Welcome to Saint Matthieu</p>
-                  <h1 className="animate-text" style={{ color: '#0b1e3d' }}>Empowering Students for a Brighter Future</h1>
-                  <p className="animate-text">
-                    Saint Matthieu is committed to nurturing academic excellence, creativity,
-                    and strong values for every student.
+                <div className="col-12 hero-content text-center text-white">
+                  <p className="text-danger-custom animate-text mb-2" style={{ fontSize: '1.25rem' }}>
+                    <i className="bi bi-stars me-2"></i>Welcome to GS Busasamana
                   </p>
-                  <button className="btn hero-btn" style={{ backgroundColor: '#0b1e3d', color: '#fff' }}>
-                    Learn More
-                  </button>
+                  <h1 className="animate-text display-4 fw-bold mb-4">
+                    Empowering Students for Excellence
+                  </h1>
+                  <p className="animate-text lead mb-5" style={{ maxWidth: '700px', margin: '0 auto' }}>
+                    GS Busasamana is committed to nurturing academic achievement, discipline,
+                    and holistic development for every student.
+                  </p>
+                  <div className="d-flex gap-3 justify-content-center">
+                    <button className="btn hero-btn btn-lg" style={{ 
+                      backgroundColor: '#b40000',
+                      borderColor: '#b40000',
+                      color: '#fff'
+                    }}>
+                      Learn More <i className="bi bi-arrow-right ms-2"></i>
+                    </button>
+                    <button className="btn hero-btn btn-lg" style={{ 
+                      backgroundColor: 'transparent',
+                      border: '2px solid #fff',
+                      color: '#fff'
+                    }}>
+                      Admissions <i className="bi bi-file-earmark-text ms-2"></i>
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
+
         {/* Second Slide */}
         <div className="carousel-item">
           <div
             className="hero-section"
             style={{
-              backgroundImage: `url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR50EIz-7WlDlfOr7PQ6RzAHYfM4ZmG3hH-mg&s)`,
+              backgroundImage: `linear-gradient(rgba(11, 30, 61, 0.7), rgba(11, 30, 61, 0.7)), url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR50EIz-7WlDlfOr7PQ6RzAHYfM4ZmG3hH-mg&s)`,
             }}
           >
             <div className="container h-100">
               <div className="row h-100 align-items-center">
-                <div className="col-12 hero-content text-center text-md-left text-white">
-                  <p className="text-danger animate-text">Unlock Potential</p>
-                  <h1 className="animate-text" style={{ color: '#0b1e3d' }}>Building Future Leaders Today</h1>
-                  <p className="animate-text">
-                    We offer a supportive learning environment that encourages
-                    leadership, innovation, and community engagement.
+                <div className="col-12 hero-content text-center text-white">
+                  <p className="text-danger-custom animate-text mb-2" style={{ fontSize: '1.25rem' }}>
+                    <i className="bi bi-trophy me-2"></i>Academic Excellence
                   </p>
-                  <button className="btn hero-btn" style={{ backgroundColor: '#0b1e3d', color: '#fff' }}>
-                    Explore
-                  </button>
+                  <h1 className="animate-text display-4 fw-bold mb-4">
+                    Building Future Leaders
+                  </h1>
+                  <p className="animate-text lead mb-5" style={{ maxWidth: '700px', margin: '0 auto' }}>
+                    Our programs develop critical thinking, leadership skills, and 
+                    social responsibility in a supportive learning environment.
+                  </p>
+                  <div className="d-flex gap-3 justify-content-center">
+                    <button className="btn hero-btn btn-lg" style={{ 
+                      backgroundColor: '#b40000',
+                      borderColor: '#b40000',
+                      color: '#fff'
+                    }}>
+                      View Programs <i className="bi bi-book ms-2"></i>
+                    </button>
+                    <button className="btn hero-btn btn-lg" style={{ 
+                      backgroundColor: 'transparent',
+                      border: '2px solid #fff',
+                      color: '#fff'
+                    }}>
+                      Gallery <i className="bi bi-images ms-2"></i>
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -76,6 +111,49 @@ function HeroCarousel() {
         <span className="carousel-control-next-icon" aria-hidden="true"></span>
         <span className="visually-hidden">Next</span>
       </button>
+
+      {/* Bootstrap Icons */}
+      <link 
+        rel="stylesheet" 
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css"
+      />
+
+      {/* Inline CSS */}
+      <style jsx>{`
+        .hero-section {
+          height: 90vh;
+          min-height: 600px;
+          background-size: cover;
+          background-position: center;
+          display: flex;
+          align-items: center;
+        }
+        .text-danger-custom {
+          color: #b40000;
+        }
+        .hero-btn {
+          transition: all 0.3s ease;
+          padding: 0.75rem 1.5rem;
+          font-weight: 500;
+        }
+        .hero-btn:hover {
+          transform: translateY(-3px);
+          box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        .animate-text {
+          animation: fadeInUp 1s ease;
+        }
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+      `}</style>
     </div>
   );
 }

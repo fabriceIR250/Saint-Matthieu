@@ -1,57 +1,87 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+  
   const styles = {
     navbar: {
-      backgroundColor: '#ffffff',
-      borderBottom: '3px solid #0b1e3d', // Deep navy blue
+      backgroundColor: '#0b1e3d', // Navy blue background
       padding: '1rem 2rem',
       zIndex: 1000,
     },
     navLink: {
-      color: '#0b1e3d',
+      color: '#ffffff', // White text
       fontWeight: '500',
-      transition: 'color 0.3s ease',
+      transition: 'all 0.3s ease',
+      padding: '0.5rem 1rem',
+      borderRadius: '4px',
     },
     navLinkHover: {
-      color: '#b40000',
+      color: '#ffffff',
+      backgroundColor: '#b40000', // Red background on hover
+    },
+    navLinkActive: {
+      color: '#ffffff',
+      backgroundColor: '#b40000', // Red background for active link
     },
     brandLogo: {
-      height: '60px',
+      height: '40px',
+      filter: 'brightness(0) invert(1)', // Makes logo white
     },
     btnOutline: {
-      color: '#0b1e3d',
-      border: '1px solid #0b1e3d',
+      color: '#ffffff',
+      border: '1px solid #ffffff',
       transition: 'all 0.3s ease',
+      marginRight: '0.5rem',
     },
     btnOutlineHover: {
-      backgroundColor: '#0b1e3d',
-      color: '#fff',
+      backgroundColor: '#ffffff',
+      color: '#0b1e3d',
     },
     btnPrimary: {
-      backgroundColor: '#b40000',
+      backgroundColor: '#b40000', // Red button
       border: '1px solid #b40000',
       color: '#fff',
       transition: 'all 0.3s ease',
     },
     btnPrimaryHover: {
-      backgroundColor: '#900000',
+      backgroundColor: '#900000', // Darker red on hover
       borderColor: '#900000',
+    },
+    toggler: {
+      filter: 'invert(1)', // White toggler icon
     },
   };
 
+  // Check if a nav item is active
+  const isActive = (path) => {
+    return location.pathname === path;
+  };
+
+  // Handle navigation to login page
+  const handleLoginClick = () => {
+    navigate('/login');
+  };
+
+  // Handle navigation to register page
+  const handleRegisterClick = () => {
+    navigate('/register');
+  };
+
   return (
-    <nav className="navbar navbar-expand-lg fixed-top shadow" style={styles.navbar}>
+    <nav className="navbar navbar-expand-lg fixed-top" style={styles.navbar}>
       <div className="container-fluid">
-        <Link className="navbar-brand fw-bold" to="/">
-          <img src="/Logo.png" alt="School Logo" style={styles.brandLogo} />
-        </Link>
+        <NavLink className="navbar-brand fw-bold" to="/">
+          <img src="/Logo.png" alt="GS Busasamana Logo" style={styles.brandLogo} />
+        </NavLink>
         <button
           className="navbar-toggler"
           type="button"
           data-bs-toggle="collapse"
           data-bs-target="#navbarNav"
+          style={styles.toggler}
         >
           <span className="navbar-toggler-icon"></span>
         </button>
@@ -61,21 +91,34 @@ const Navbar = () => {
             {[
               { to: '/', label: 'Home', icon: 'house-door' },
               { to: '/about', label: 'About Us', icon: 'info-circle' },
-              { to: '/academics', label: 'Academics', icon: 'book' },
               { to: '/admissions', label: 'Admissions', icon: 'file-earmark-text' },
+              { to: '/exams', label: 'Exams', icon: 'book' },
               { to: '/gallery', label: 'Gallery', icon: 'camera' },
               { to: '/contact', label: 'Contact', icon: 'envelope' },
-            ].map(({ to, label, icon }, index) => (
-              <li className="nav-item mx-2" key={index}>
-                <Link
+            ].map(({ to, label, icon }) => (
+              <li className="nav-item mx-1" key={to}>
+                <NavLink
                   className="nav-link"
                   to={to}
-                  style={styles.navLink}
-                  onMouseEnter={(e) => (e.target.style.color = styles.navLinkHover.color)}
-                  onMouseLeave={(e) => (e.target.style.color = styles.navLink.color)}
+                  style={({ isActive }) => ({
+                    ...styles.navLink,
+                    ...(isActive ? styles.navLinkActive : {}),
+                  })}
+                  onMouseEnter={(e) => {
+                    if (!isActive(to)) {
+                      e.currentTarget.style.color = styles.navLinkHover.color;
+                      e.currentTarget.style.backgroundColor = styles.navLinkHover.backgroundColor;
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    if (!isActive(to)) {
+                      e.currentTarget.style.color = styles.navLink.color;
+                      e.currentTarget.style.backgroundColor = 'transparent';
+                    }
+                  }}
                 >
-                  <i className={`bi bi-${icon}`}></i> {label}
-                </Link>
+                  <i className={`bi bi-${icon} me-1`}></i> {label}
+                </NavLink>
               </li>
             ))}
           </ul>
@@ -84,6 +127,7 @@ const Navbar = () => {
             <button
               className="btn mx-2"
               style={styles.btnOutline}
+              onClick={handleLoginClick}
               onMouseEnter={(e) => {
                 e.target.style.backgroundColor = styles.btnOutlineHover.backgroundColor;
                 e.target.style.color = styles.btnOutlineHover.color;
@@ -98,6 +142,7 @@ const Navbar = () => {
             <button
               className="btn"
               style={styles.btnPrimary}
+              onClick={handleRegisterClick}
               onMouseEnter={(e) => {
                 e.target.style.backgroundColor = styles.btnPrimaryHover.backgroundColor;
                 e.target.style.borderColor = styles.btnPrimaryHover.borderColor;
