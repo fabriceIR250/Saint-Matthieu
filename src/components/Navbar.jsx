@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { onAuthStateChanged, signOut } from 'firebase/auth';
 import { auth } from '../firebase'; // adjust this to your correct path
@@ -6,6 +6,7 @@ import { auth } from '../firebase'; // adjust this to your correct path
 const Navbar = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const navbarCollapseRef = useRef(null);
 
   const [user, setUser] = useState(null);
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -24,10 +25,17 @@ const Navbar = () => {
 
   const handleDashboard = () => {
     navigate('/user/Dashboard');
+    closeNavbar();
   };
 
   const toggleDropdown = () => {
     setDropdownOpen(!dropdownOpen);
+  };
+
+  const closeNavbar = () => {
+    if (navbarCollapseRef.current && navbarCollapseRef.current.classList.contains('show')) {
+      navbarCollapseRef.current.classList.remove('show');
+    }
   };
 
   const styles = {
@@ -42,10 +50,6 @@ const Navbar = () => {
       transition: 'all 0.3s ease',
       padding: '0.5rem 1rem',
       borderRadius: '4px',
-    },
-    navLinkHover: {
-      color: '#ffffff',
-      backgroundColor: '#b40000',
     },
     navLinkActive: {
       color: '#ffffff',
@@ -117,7 +121,7 @@ const Navbar = () => {
   return (
     <nav className="navbar navbar-expand-lg fixed-top" style={styles.navbar}>
       <div className="container-fluid">
-        <NavLink className="navbar-brand fw-bold" to="/">
+        <NavLink className="navbar-brand fw-bold" to="/" onClick={closeNavbar}>
           <img src="/Logo.png" alt="Logo" style={styles.brandLogo} />
         </NavLink>
 
@@ -131,7 +135,7 @@ const Navbar = () => {
           <span className="navbar-toggler-icon"></span>
         </button>
 
-        <div className="collapse navbar-collapse justify-content-center" id="navbarNav">
+        <div className="collapse navbar-collapse justify-content-center" id="navbarNav" ref={navbarCollapseRef}>
           <ul className="navbar-nav">
             {[
               { to: '/', label: 'Home', icon: 'house-door' },
@@ -145,6 +149,7 @@ const Navbar = () => {
                 <NavLink
                   className="nav-link"
                   to={to}
+                  onClick={closeNavbar}
                   style={({ isActive }) => ({
                     ...styles.navLink,
                     ...(isActive ? styles.navLinkActive : {}),
@@ -162,14 +167,20 @@ const Navbar = () => {
                 <button
                   className="btn mx-2"
                   style={styles.btnOutline}
-                  onClick={() => navigate('/login')}
+                  onClick={() => {
+                    navigate('/login');
+                    closeNavbar();
+                  }}
                 >
                   Login
                 </button>
                 <button
                   className="btn"
                   style={styles.btnPrimary}
-                  onClick={() => navigate('/register')}
+                  onClick={() => {
+                    navigate('/register');
+                    closeNavbar();
+                  }}
                 >
                   Register
                 </button>
