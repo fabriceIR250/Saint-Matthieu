@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { onAuthStateChanged, signOut } from 'firebase/auth';
-import { auth } from '../firebase'; // adjust this to your correct path
+import { auth } from '../firebase';
 
 const Navbar = () => {
   const location = useLocation();
@@ -28,12 +28,10 @@ const Navbar = () => {
     closeNavbar();
   };
 
-  const toggleDropdown = () => {
-    setDropdownOpen(!dropdownOpen);
-  };
+  const toggleDropdown = () => setDropdownOpen(!dropdownOpen);
 
   const closeNavbar = () => {
-    if (navbarCollapseRef.current && navbarCollapseRef.current.classList.contains('show')) {
+    if (navbarCollapseRef.current?.classList.contains('show')) {
       navbarCollapseRef.current.classList.remove('show');
     }
   };
@@ -46,30 +44,30 @@ const Navbar = () => {
     },
     navLink: {
       color: '#ffffff',
-      fontWeight: '500',
+      fontWeight: '600',
+      textTransform: 'uppercase',
       transition: 'all 0.3s ease',
       padding: '0.5rem 1rem',
-      borderRadius: '4px',
+      fontSize: '0.95rem',
     },
     navLinkActive: {
       color: '#ffffff',
       backgroundColor: '#b40000',
+      borderRadius: '4px',
     },
     brandLogo: {
-      height: '40px',
-      filter: 'brightness(0) invert(1)',
-    },
-    btnOutline: {
-      color: '#ffffff',
-      border: '1px solid #ffffff',
-      transition: 'all 0.3s ease',
-      marginRight: '0.5rem',
+      height: '45px',
     },
     btnPrimary: {
       backgroundColor: '#b40000',
-      border: '1px solid #b40000',
+      border: 'none',
       color: '#fff',
-      transition: 'all 0.3s ease',
+      padding: '0.5rem 1rem',
+      borderRadius: '5px',
+      fontWeight: '600',
+      marginLeft: '0.75rem',
+      textTransform: 'uppercase',
+      fontSize: '0.9rem',
     },
     profileImage: {
       width: '40px',
@@ -114,10 +112,6 @@ const Navbar = () => {
     }
   };
 
-  const isActive = (path) => {
-    return location.pathname === path;
-  };
-
   return (
     <nav className="navbar navbar-expand-lg fixed-top" style={styles.navbar}>
       <div className="container-fluid">
@@ -138,13 +132,13 @@ const Navbar = () => {
         <div className="collapse navbar-collapse justify-content-center" id="navbarNav" ref={navbarCollapseRef}>
           <ul className="navbar-nav">
             {[
-              { to: '/', label: 'Home', icon: 'house-door' },
-              { to: '/about', label: 'About Us', icon: 'info-circle' },
-              { to: '/admissions', label: 'Admissions', icon: 'file-earmark-text' },
-              { to: '/exams', label: 'Exams', icon: 'book' },
-              { to: '/gallery', label: 'Gallery', icon: 'camera' },
-              { to: '/contact', label: 'Contact', icon: 'envelope' },
-            ].map(({ to, label, icon }) => (
+              { to: '/', label: 'Home' },
+              { to: '/about', label: 'About Us' },
+              { to: '/admissions', label: 'Admissions' },
+              { to: '/academics', label: 'Academics' },
+              { to: '/gallery', label: 'Gallery' },
+              { to: '/contact', label: 'Contact' },
+            ].map(({ to, label }) => (
               <li className="nav-item mx-1" key={to}>
                 <NavLink
                   className="nav-link"
@@ -155,7 +149,7 @@ const Navbar = () => {
                     ...(isActive ? styles.navLinkActive : {}),
                   })}
                 >
-                  <i className={`bi bi-${icon} me-1`}></i> {label}
+                  {label}
                 </NavLink>
               </li>
             ))}
@@ -165,24 +159,14 @@ const Navbar = () => {
             {!user ? (
               <>
                 <button
-                  className="btn mx-2"
-                  style={styles.btnOutline}
-                  onClick={() => {
-                    navigate('/login');
-                    closeNavbar();
-                  }}
-                >
-                  Login
-                </button>
-                <button
                   className="btn"
                   style={styles.btnPrimary}
                   onClick={() => {
-                    navigate('/register');
+                    navigate('/admissions');
                     closeNavbar();
                   }}
                 >
-                  Register
+                  Apply Now
                 </button>
               </>
             ) : (

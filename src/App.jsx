@@ -11,6 +11,9 @@ import Gallery from './pages/Gallery';
 import LoginForm from './components/Login';
 import Pages from './pages/Page404';
 import Dashboard from './user/Dashbord';
+import ProfileCompletion from './user/ProfileCompletion';
+import Academics from './pages/Academics';
+
 
 function App() {
   return (
@@ -26,6 +29,8 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="*" element={<Pages />} />
         <Route path="/user/Dashboard" element={<Dashboard />} />
+        <Route path="/complete-profile" element={<ProfileCompletion />} />
+        <Route path="/Academics" element={<Academics />} />
       </Routes>
     </Router>
   );

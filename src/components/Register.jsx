@@ -80,39 +80,25 @@ function RegistrationForm() {
             setLoading(false);
         }
     };
-
     const handleGoogleSignIn = async () => {
         const provider = new GoogleAuthProvider();
         setError('');
         setLoading(true);
         try {
-            const result = await signInWithPopup(auth, provider);
-            const user = result.user;
-
-            const userData = {
-                firstName: user.displayName.split(' ')[0],
-                lastName: user.displayName.split(' ').slice(1).join(' '),
-                phone: '',
-                role: '',
-                terms: true,
-                createdAt: new Date(),
-                uid: user.uid,
-            };
-
-            console.log("Data to be stored on google sign in: ", userData);
-
-            await setDoc(doc(db, 'users', user.uid), userData);
-
-            console.log("Data stored successfully on google sign in!");
-
-            navigate('/login');
+          const result = await signInWithPopup(auth, provider);
+          const user = result.user;
+      
+          // Redirect to profile completion page with UID
+          navigate('/complete-profile', { state: { uid: user.uid, email: user.email, displayName: user.displayName } });
+      
         } catch (error) {
-            setError(error.message);
-            console.error('Google Sign-In Error: ', error);
+          setError(error.message);
+          console.error('Google Sign-In Error: ', error);
         } finally {
-            setLoading(false);
+          setLoading(false);
         }
-    };
+      };
+      
 
     return (
         <>
