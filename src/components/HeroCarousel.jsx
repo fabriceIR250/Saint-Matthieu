@@ -1,7 +1,10 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import './HeroCarousel.css';
 
 function HeroCarousel() {
+  const navigate = useNavigate();
+
   return (
     <div id="heroCarousel" className="carousel slide" data-bs-ride="carousel">
       <div className="carousel-inner">
@@ -27,18 +30,22 @@ function HeroCarousel() {
                     and holistic development for every student.
                   </p>
                   <div className="d-flex gap-3 justify-content-center">
-                    <button className="btn hero-btn btn-lg" style={{ 
+                    <button className="btn hero-btn btn-lg" style={{
                       backgroundColor: '#b40000',
                       borderColor: '#b40000',
                       color: '#fff'
                     }}>
                       Learn More <i className="bi bi-arrow-right ms-2"></i>
                     </button>
-                    <button className="btn hero-btn btn-lg" style={{ 
-                      backgroundColor: 'transparent',
-                      border: '2px solid #fff',
-                      color: '#fff'
-                    }}>
+                    <button
+                      className="btn hero-btn btn-lg"
+                      style={{
+                        backgroundColor: 'transparent',
+                        border: '2px solid #fff',
+                        color: '#fff'
+                      }}
+                      onClick={() => navigate('/admissions')}
+                    >
                       Admissions <i className="bi bi-file-earmark-text ms-2"></i>
                     </button>
                   </div>
@@ -70,19 +77,64 @@ function HeroCarousel() {
                     social responsibility in a supportive learning environment.
                   </p>
                   <div className="d-flex gap-3 justify-content-center">
-                    <button className="btn hero-btn btn-lg" style={{ 
+                    <button className="btn hero-btn btn-lg" style={{
                       backgroundColor: '#b40000',
                       borderColor: '#b40000',
                       color: '#fff'
                     }}>
                       View Programs <i className="bi bi-book ms-2"></i>
                     </button>
-                    <button className="btn hero-btn btn-lg" style={{ 
+                    <button className="btn hero-btn btn-lg" style={{
                       backgroundColor: 'transparent',
                       border: '2px solid #fff',
                       color: '#fff'
                     }}>
                       Gallery <i className="bi bi-images ms-2"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Third Slide - Login and Signup */}
+        <div className="carousel-item">
+          <div
+            className="hero-section"
+            style={{
+              backgroundImage: `linear-gradient(rgba(11, 30, 61, 0.7), rgba(11, 30, 61, 0.7)), url(https://images.unsplash.com/photo-1588072432836-e10032774350?auto=format&fit=crop&w=1400&q=80)`,
+            }}
+          >
+            <div className="container h-100">
+              <div className="row h-100 align-items-center">
+                <div className="col-12 hero-content text-center text-white">
+                  <h1 className="animate-text display-4 fw-bold mb-4">Join Our Community</h1>
+                  <p className="animate-text lead mb-5" style={{ maxWidth: '700px', margin: '0 auto' }}>
+                    Already have an account? Login. New here? Sign up and explore the world of learning with us.
+                  </p>
+                  <div className="d-flex gap-3 justify-content-center">
+                    <button
+                      className="btn hero-btn btn-lg"
+                      style={{
+                        backgroundColor: '#b40000',
+                        borderColor: '#b40000',
+                        color: '#fff'
+                      }}
+                      onClick={() => navigate('/login')}
+                    >
+                      Login <i className="bi bi-box-arrow-in-right ms-2"></i>
+                    </button>
+                    <button
+                      className="btn hero-btn btn-lg"
+                      style={{
+                        backgroundColor: 'transparent',
+                        border: '2px solid #fff',
+                        color: '#fff'
+                      }}
+                      onClick={() => navigate('/register')}
+                    >
+                      Sign Up <i className="bi bi-person-plus ms-2"></i>
                     </button>
                   </div>
                 </div>
@@ -113,8 +165,8 @@ function HeroCarousel() {
       </button>
 
       {/* Bootstrap Icons */}
-      <link 
-        rel="stylesheet" 
+      <link
+        rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css"
       />
 
